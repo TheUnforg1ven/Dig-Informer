@@ -1,7 +1,7 @@
 # Dig-Informer
 App to find info about how much games user can buy on DailyIndieGame
 ___________________________________________________________________________________________________________________________
-## Here you can see screenshots of using this app
+# Here you can see screenshots of using this app
 
 ![1](https://user-images.githubusercontent.com/38386015/47956067-bc827980-dfa7-11e8-9058-59ee3cdc9ef1.png)
 
