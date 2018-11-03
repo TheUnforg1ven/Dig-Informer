@@ -1,0 +1,188 @@
+﻿<Page x:Class="DIGStatus.UserInfoPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DIGStatus"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="UserInfoPage">
+
+    <Grid>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition  Height="1.2*"></RowDefinition>
+                <RowDefinition  Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <!-- For entering info -->
+            <Grid Grid.Row="0">
+                <StackPanel Margin="5 5 0 0">
+                    <Label FontSize="{StaticResource FontSizeRegular}"
+                           Content="Enter steam account link: " />
+                    <TextBox Text="{Binding EnteredUserName}" />
+
+                    <Button Content="Find User" Command="{Binding FindUser}" />
+                    <Button 
+                        Content="Find avalible games" 
+                        Command="{Binding FindAvailableGames}" 
+                        IsEnabled="{Binding CanCloseAvailableAll}" />
+                    <Button 
+                        Content="Find avalible games with cards" 
+                        Command="{Binding FindAvailableGamesWithCards}"
+                        IsEnabled="{Binding CanCloseAvailableAllCards}" />
+                </StackPanel>
+            </Grid>
+
+            <!-- Show user games lsit-->
+            <Grid Grid.Row="1">
+                <ListView  FontSize="{StaticResource FontSizeMiddle}"
+                       Background="{StaticResource BackgroundLightBrush}" 
+                       BorderThickness="0" 
+                       ItemsSource="{Binding ListViewSourse}" >
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBox
+                                FontSize="{StaticResource FontSizeMiddle}"
+                                Background="Transparent"
+                                 BorderThickness="0"
+                                IsReadOnly="True"
+                                Text="{Binding Path=.,Mode=OneWay}">
+                                <TextBox.Style>
+                                    <Style TargetType="{x:Type TextBox}">
+                                        <Setter Property="BorderBrush" Value="{StaticResource LetsTalkMouseOverBrush}" />
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="BorderBrush"  Value="#252526"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </Grid>
+
+        <!-- Grid with all user information -->
+        <Grid Grid.Column="1">
+            <StackPanel Margin="8 5 0 0">
+
+                <!-- User avatar -->
+                <StackPanel Orientation="Horizontal">
+                    <Border BorderThickness="2" 
+                                BorderBrush="{StaticResource LetsTalkOrangeBrush}" 
+                                CornerRadius="3">
+                        <Image Source="{Binding UserAvatar}"
+                                   Width="80" Height="80" />
+                    </Border>
+                </StackPanel>
+
+                <!-- User name -->
+                <StackPanel Orientation="Horizontal">
+                    <Label FontSize="{StaticResource FontSizeRegular}"
+                           Content="Username: " />
+                    <TextBlock Margin="0 7 0 0"
+                        Text="{Binding UserName}"
+                        FontSize="{StaticResource FontSizeRegular}"/>
+                </StackPanel>
+
+                <!-- User profile status -->
+                <StackPanel Orientation="Horizontal">
+                    <Label FontSize="{StaticResource FontSizeRegular}"
+                           Content="Profile status: " />
+                    <TextBlock Margin="0 7 0 0"
+                        Text="{Binding UserProfileStatus}"
+                        FontSize="{StaticResource FontSizeRegular}"/>
+                </StackPanel>
+
+                <!-- User profile state -->
+                <StackPanel Orientation="Horizontal">
+                    <Label FontSize="{StaticResource FontSizeRegular}"
+                           Content="Profile state: " />
+                    <TextBlock Margin="0 7 0 0"
+                        Text="{Binding UserProfileState}"
+                        FontSize="{StaticResource FontSizeRegular}"/>
+                </StackPanel>
+
+                <!-- User country code -->
+                <StackPanel Orientation="Horizontal">
+                    <Label FontSize="{StaticResource FontSizeRegular}"
+                           Content="Country code: " />
+                    <TextBlock Margin="0 7 0 0"
+                        Text="{Binding UserCountryCode}"
+                        FontSize="{StaticResource FontSizeRegular}"/>
+                </StackPanel>
+
+                <!-- User games amount -->
+                <StackPanel Orientation="Horizontal">
+                    <Label FontSize="{StaticResource FontSizeRegular}"
+                           Content="Games amount: " />
+                    <TextBlock Margin="0 7 0 0"
+                        Text="{Binding UserGameCount}"
+                        FontSize="{StaticResource FontSizeRegular}"/>
+                </StackPanel>
+                
+                <Separator Margin="5 0"/>
+                
+                <!-- User can buy dig games -->
+                <StackPanel Orientation="Horizontal">
+                    <Label FontSize="{StaticResource FontSizeRegular}"
+                           Content="Can buy games: " />
+                    <TextBlock Margin="0 7 0 0"
+                        Text="{Binding AmountGamesAll}"
+                        FontSize="{StaticResource FontSizeRegular}"/>
+                </StackPanel>
+
+                <!-- User can buy dig games with cards -->
+                <StackPanel Orientation="Horizontal">
+                    <Label FontSize="{StaticResource FontSizeRegular}"
+                           Content="Can buy games with cards: " />
+                    <TextBlock Margin="0 7 0 0"
+                        Text="{Binding AmountGamesWithCards}"
+                        FontSize="{StaticResource FontSizeRegular}"/>
+                </StackPanel>
+
+                <Separator Margin="5 0"/>
+
+                <!-- Need money to buy all games -->
+                <StackPanel Orientation="Horizontal">
+                    <Label FontSize="{StaticResource FontSizeRegular}"
+                           Content="Need to buy all games: $" />
+                    <TextBlock Margin="0 7 0 0"
+                        Text="{Binding GamesAllSumm}"
+                        FontSize="{StaticResource FontSizeRegular}"/>
+                </StackPanel>
+
+                <!-- Need money to buy games with cards -->
+                <StackPanel Orientation="Horizontal">
+                    <Label FontSize="{StaticResource FontSizeRegular}"
+                           Content="Need to buy games with cards: $" />
+                    <TextBlock Margin="0 7 0 0"
+                        Text="{Binding GamesWithCardsSumm }"
+                        FontSize="{StaticResource FontSizeRegular}"/>
+                </StackPanel>
+
+                <Separator Margin="5 0"/>
+
+                <!-- Buttons to save game names -->
+                <Button Margin="5 7 5 5 " 
+                        Content="Save all games into file..."
+                        IsEnabled="{Binding CanCloseSaveAll}"
+                        Command="{Binding SaveAllInfo}"/>
+                <Button Margin="5 5 5 5 " 
+                        Content="Save games with cards into file..." 
+                        IsEnabled="{Binding CanCloseSaveCards}"
+                        Command="{Binding SaveInfoAboutCards}" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>
